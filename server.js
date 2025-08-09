@@ -9,7 +9,7 @@ const userRoutes = require('./routes/userRoutes');
 dotenv.config();
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: 'https://task-manager-frontend-eta-vert.vercel.app' }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
