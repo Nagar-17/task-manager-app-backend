@@ -9,14 +9,21 @@ const userRoutes = require('./routes/userRoutes');
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: 'https://task-manager-frontend-eta-vert.vercel.app' }));
+app.use(cors({
+  origin: [
+    "http://localhost:3000", // development ke liye
+    "https://task-manager-frontend-eta-vert.vercel.app" // production ke liye
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-app.use('/api/tasks', taskRoutes); // 👈 Task routes connected
+app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 5000;
